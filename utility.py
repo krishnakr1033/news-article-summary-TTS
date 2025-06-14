@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 import os
 from urllib.parse import urlparse
+from scrapper import *
 
 
 def user_input(params): 
@@ -50,6 +51,9 @@ def url_to_domain(url):
     parsed_url = urlparse(url)
     return parsed_url.netloc
 
-
-
-        
+def source_domain_fn(df,sources_domain : list):
+    for source_domain in sources_domain:
+        if source_domain=='www.businesstoday.in':
+            bussinesstoday_scrapping(df, source_domain)
+        elif source_domain=='www.thehindu.com':
+            thehindu_scrapping(df, source_domain)

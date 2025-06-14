@@ -40,7 +40,8 @@ def mainContent(df):
             with col:
                 st.markdown(f"### {row.get('title', 'No Title')}")
                 st.write(f"**Description:** {row.get('description', 'N/A')}")
-                st.write(f"**URL:** {row.get('url', 'N/A')}")
+                # st.write(f"**URL:** {row.get('url', 'N/A')}")
+                st.link_button("**URL**",row.get('url', 'N/A'))
                 st.write(f"**Category:** {row.get('category', 'N/A')}")
                 st.write(f"**Language:** {row.get('language', 'N/A')}")
                 st.write(f"**Published At:** {row.get('published_at', 'N/A')}")

@@ -35,10 +35,3 @@ def bussinesstoday_scrapping(df, source_domain):
             except Exception as e:
                 print(f"Error processing {row['url']}: {e}")
 
-def source_domain_fn(df,sources_domain : list):
-    for source_domain in sources_domain:
-        if source_domain=='www.businesstoday.in':
-            bussinesstoday_scrapping(df, source_domain)
-        elif source_domain=='www.thehindu.com':
-            thehindu_scrapping(df, source_domain)
-

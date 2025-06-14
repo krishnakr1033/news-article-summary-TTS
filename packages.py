@@ -17,3 +17,5 @@ from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.memory import ConversationBufferMemory
 from langchain_core.runnables import RunnablePassthrough, RunnableLambda, RunnableSequence
 from langchain_core.output_parsers import StrOutputParser
+from keybert import KeyBERT
+
