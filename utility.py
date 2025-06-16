@@ -11,7 +11,7 @@ def user_input(params):
     arguments = {
         k: copy.deepcopy(v)
         for k, v in params.items()
-        if v not in (None, '', [], {}, ())
+        if v not in (None, '', [], {}, (), 'None')
     }
 
     # Conditionally join 'languages' and 'countries' if they exist
@@ -21,7 +21,7 @@ def user_input(params):
     if 'countries' in arguments:
         arguments['countries'] = ",".join(arguments['countries'])
 
-    print(arguments)
+    print("arguments: ",arguments)
     return arguments
 
 
@@ -57,3 +57,11 @@ def source_domain_fn(df,sources_domain : list):
             bussinesstoday_scrapping(df, source_domain)
         elif source_domain=='www.thehindu.com':
             thehindu_scrapping(df, source_domain)
+
+def keywords_extractor(main_contextt):
+    kw_model = KeyBERT(model='all-MiniLM-L6-v2')
+    keywords = kw_model.extract_keywords(main_contextt, top_n=5)
+    words=[]
+    for item in keywords:
+        words.append(item[0])
+    return words

@@ -6,32 +6,20 @@ import backend
 
 def init_session_state():
     if 'user_params' not in st.session_state:
-        st.session_state.user_params = {
-            # "keywords": [],
-            # "languages": [],
-            # "countries": [],
-            # "categories":[],
-            # # "sources":[],
-            # "limit":15, #default values
-            # "offset":0,
-            # "date":None # shows the range from date and to date
-        }
-    if 'categorical_params' not in st.session_state:
-        st.session_state.categorical_params={
-            # making dictionary of parameters
-            # "paramlist" : ["sources", "languages", "countries", "categories", "keywords", "limit", "offset", "date", "sort"],
-            "categories" : ["general","business", "entertainment", "health", "science", "sports", "technology"],
-            "countries" : ["ar", "at", "au", "be", "bg", "br", "ca", "cn", "co", "cu", "cz", "de", "eg", "fr", "gb", "gr", "hk", "hu", "id", "ie", "il", "in", "it", "jp", "kr", "lt", "lv", "ma", "mx", "my", "ng", "nl", "no", "nz", "ph", "pl", "pt", "ro", "rs", "ru", "sa", "se","sg","si","sk","th","tr","tw","ua","us","ve","za"],
-            "languages" : ["ar", "de", "en", "es", "fr", "he", "it", "se", "nl", "pt", "ru", "zh"] 
-        }
+        st.session_state.user_params = {}
+    if "chatbot" not in st.session_state:
+        st.session_state.chatbot = None
+    if 'content' not in st.session_state:
+        st.session_state.content = None
+    if 'main_body_calling' not in st.session_state:
+        st.session_state.main_body_calling=False
 
     # may be we can add for news sorces for extended study
 
 
 def main():
-    
     init_session_state()
-
+    
     with st.sidebar:
         st.markdown('Parameter for *filteration*:')
         st.session_state.user_params['categories'] =str(st.selectbox(
@@ -82,28 +70,29 @@ def main():
 
         col1 ,col2 = st.columns(2)
         with col1:
-            st.session_state.user_params['limit']=st.number_input("Insert Integer Value:",value=15)
+            st.session_state.user_params['limit']=st.number_input("Maximum Liimit (atmost 100):",value=15)
         with col2:
-            st.session_state.user_params['offset']=st.number_input("Insert Integer Value:",value=0)
+            st.session_state.user_params['offset']=st.number_input("Offset value:",value=0)
 
 
         col1, col2 = st.columns(2)
         with col1:
             if st.button('update parameter'):
                 st.session_state.parameter = utility.user_input(st.session_state.user_params)
+                # with st.spinner("🔄 Extracting data, please wait..."):
                 st.session_state.content = backend.data_extractor(st.session_state.parameter)
                 st.session_state.main_body_calling = True
 
         with col2:
-            if st.button('Reset session'):
+            if st.button('Refresh/Reset Session'):
+                st.session_state.clear()
+                init_session_state()
                 st.rerun()
-                # init_session_state()
 
     # main body ----------------------------------------------------------------------------------------------------
     st.title("Hello, *Welcome* to **NewsMagic!** :sunglasses:")
 
     if st.session_state.get('main_body_calling',True):
-        # st.markdown('this is okay- 108')
         app_mainContent.mainContent(
             st.session_state.content
         )
