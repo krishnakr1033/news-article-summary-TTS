@@ -7,10 +7,8 @@ import backend
 def init_session_state():
     if 'user_params' not in st.session_state:
         st.session_state.user_params = {}
-    if "chatbot" not in st.session_state:
-        st.session_state.chatbot = None
-    if 'content' not in st.session_state:
-        st.session_state.content = None
+    # if "chatbot" not in st.session_state:
+    #     st.session_state.chatbot = None
     if 'main_body_calling' not in st.session_state:
         st.session_state.main_body_calling=False
 
@@ -80,7 +78,9 @@ def main():
             if st.button('update parameter'):
                 st.session_state.parameter = utility.user_input(st.session_state.user_params)
                 # with st.spinner("🔄 Extracting data, please wait..."):
-                st.session_state.content = backend.data_extractor(st.session_state.parameter)
+                if 'content' not in st.session_state:
+                    st.session_state.content = backend.data_extractor(st.session_state.parameter)
+                # st.session_state.content = backend.data_extractor(st.session_state.parameter)
                 st.session_state.main_body_calling = True
 
         with col2:

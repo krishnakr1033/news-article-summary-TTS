@@ -4,6 +4,8 @@ from datetime import datetime
 import os
 from urllib.parse import urlparse
 from scrapper import *
+from sentence_transformers import SentenceTransformer
+
 
 
 def user_input(params): 
