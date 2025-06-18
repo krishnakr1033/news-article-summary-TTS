@@ -1,4 +1,4 @@
-# news-article-summary-with-ai-assistant
+# News-article-summary-with-ai-assistant
 
 This project implements an intelligent news article assistant that dynamically adjusts to user preferences through a chat-based interface. It fetches the articles as per the user requirement from MediaStack API , upon each articles it shows their basic informations along with the summarized content, keywords, and integrated chat interface for QnA, an easy and supportinve solution to trace the current Affairs quickly.
 
@@ -31,21 +31,43 @@ Run the following command to start the application:
 streamlit run app.py
 ```
 
-**Implementation Approach**
+## Implementation Details
+<!-- * **MediaStack API integration :** -->
+    * Dyanamic URI created as per user preferences to seamlessly fetch news articles.
+    * The main content scrapped from its original website through available link to it.
+    * Summarized and bullated key points extracted using LLM, from main content.
+    * Relevant KeyWords Extracted (Topic Modelling), and integrated with QnA interface.
 
-<!-- * **Graph Database:**
-    * Utilize Neo4j to store and manage personas, traits, and user preferences.
-    * Model personas with their associated traits (preferred activities, interests) as nodes and relationships.
-    * Store user preferences (city, time_range, budget, interests, starting_point) as nodes and relationships. -->
+## Modelling Details
+### For QnA Modelling
+- LangChain Based ChatGroq Interface used as Chat Assistant Model.
+- In order to maintain the state or chat history, "ConversationBufferMemory" used
+- In order make seamless integration, Sequence Runnables used along with parser
+### For Content Summarizer and bullating relevant points of original content
+- LangChain Based ChatGroq used as LLM to do the task
+- Model is prompted to do the specific task, generate the relevant and concise response 
+### For Topic Modelling
+- Topic Modelling with LDA, an unsupervised machine learning method to extract keywords
+- Keywords Extraction using pretrained KeyBERT model, which is task specific *"all-MiniLM-L6-v2"* BERT model (this is used finally)
 
-<!-- 
-* **Workflow:**
-    * **Initialize Personas:** Create persona nodes and their associated trait nodes in the graph.
-    * **User Interaction:**
-        * Process user messages using the LLM to maintain conversation flow.
-        * Extract user preferences from the conversation history.
-        * Store user preferences in the graph.
-    * **Personalized Recommendations:** 
-        * Use the graph to retrieve relevant information (e.g., persona preferences, user preferences) for personalized recommendations.
-**Implementation Workflow**
-<img src="tour_plan.png" alt="Flowchart of the Tour Planning Process" align="center" width="500px"> -->
+
+## Streamlit Based Interface:
+
+### Initial appearance of application, before the preference given by user.
+#### ![Initial Logo](images\image1.png) 
+
+
+### Setting Parameters for filteration and triggering "Update Parameter".
+#### ![Initial Logo](images\image2.png)
+
+### Triggering the Summary Generation button
+#### ![Initial Logo](images\image3.png)
+
+
+### Triggering the Chat Assistant button to have Chat Input Block, with "U" as user query and "A" as assistant response.
+#### ![Initial Logo](images\image4.png)
+
+### Similar setup is for other news articles, where each one have information as shown in picture along with extracted keywords from original context.
+#### ![Initial Logo](images\image5.png)
+
+### The "Refresh/Reset session" will clear all main body content.
