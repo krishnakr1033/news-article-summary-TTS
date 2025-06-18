@@ -54,20 +54,20 @@ streamlit run app.py
 ## Streamlit Based Interface:
 
 ### Initial appearance of application, before the preference given by user.
-#### ![Initial Logo](images\image1.png) 
+#### ![Initial Logo](images/image1.png) 
 
 
 ### Setting Parameters for filteration and triggering "Update Parameter".
-#### ![Initial Logo](images\image2.png)
+#### ![Initial Logo](images/image2.png)
 
 ### Triggering the Summary Generation button
-#### ![Initial Logo](images\image3.png)
+#### ![Initial Logo](images/image3.png)
 
 
 ### Triggering the Chat Assistant button to have Chat Input Block, with "U" as user query and "A" as assistant response.
-#### ![Initial Logo](images\image4.png)
+#### ![Initial Logo](images/image4.png)
 
 ### Similar setup is for other news articles, where each one have information as shown in picture along with extracted keywords from original context.
-#### ![Initial Logo](images\image5.png)
+#### ![Initial Logo](images/image5.png)
 
 ### The "Refresh/Reset session" will clear all main body content.
